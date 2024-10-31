@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Todoes extends Model
+class ToDo extends Model
 {
     use HasFactory;
-    protected $table = "todoes";
+    protected $table = "todos";
     protected $guarded = false;
 }
