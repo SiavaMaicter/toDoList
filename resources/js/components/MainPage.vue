@@ -41,22 +41,18 @@ import axios from "axios";
 import ResponseAllertVue from "./messageComponents/ResponseAllert.vue";
 export default {
   data() {
-    return {
-      todos: null,
-      err: {},
-    };
+    return {};
   },
   mounted() {
-    axios
-      .get("/api/todos")
-      .then((res) => {
-        console.log(res);
-        this.todos = res.data.todos;
-      })
-      .catch((err) => {
-        this.err.message = err.response.data;
-        this.err.status = err.response.status;
-      });
+    this.$store.dispatch("getTodoList");
+  },
+  computed: {
+    todos() {
+      return this.$store.getters.todos;
+    },
+    err() {
+      return this.$store.getters.err;
+    },
   },
   components: {
     ResponseAllertVue,
