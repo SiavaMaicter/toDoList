@@ -3,7 +3,7 @@
     <div v-if="err.status">
         <ErrorMessage :alert="err" />
     </div>
-    <div v-if="todos.lenght">
+    <div v-if="todos.length">
         <div class="table-responsive">
             <table
                 class="table table-striped table-hover table-borderless table-primary align-middle"
