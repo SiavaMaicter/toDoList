@@ -2,20 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\Todoes;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\ToDo;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ToDoes>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ToDo>
  */
-class ToDoesFactory extends Factory
+class ToDoFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    protected $model = Todoes::class;
+    protected $model = ToDo::class;
     public function definition(): array
     {
         return [
