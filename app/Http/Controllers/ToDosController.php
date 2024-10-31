@@ -9,7 +9,7 @@ class ToDosController extends Controller
 {
     public function index()
     {
-        $todos = ToDo::all();
+        $todos = ToDoвфвфв::all();
         return compact('todos');
     }
 }
