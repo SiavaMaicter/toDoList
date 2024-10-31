@@ -12,11 +12,14 @@ class ToDosController extends Controller
     {
         try {
             $todos = ToDo::all();
+            if ($todos->isEmpty()) {
+                return response(compact(["message" => "Список задач пуст"]), 200);
+            }
+            // return response()->json([compact('todos'), "status" => 500]);
+            return response(compact('todos'), 200);
         } catch (Error $err) {
             // return response()->json(["error" => "Failed to retrieve tasks", "status" => 500]);
             return response("Failed to retrieve tasks", 500);
         }
-        return response(compact('todos'), 200);
-        // return response()->json([compact('todos'), "status" => 500]);
     }
 }

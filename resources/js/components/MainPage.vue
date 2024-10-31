@@ -1,7 +1,10 @@
 <template>
   <div>APP PAGE</div>
   <div v-if="err.status">
-    <ResponseAllertVue :alert="err" />
+    <ErrorMessage :alert="err" />
+  </div>
+  <div v-if="message">
+    {{ message }}
   </div>
   <div v-if="todos">
     <div class="table-responsive">
@@ -38,7 +41,7 @@
 
 <script>
 import axios from "axios";
-import ResponseAllertVue from "./messageComponents/ResponseAllert.vue";
+import ErrorMessage from "./messageComponents/ErrorMessage.vue";
 export default {
   data() {
     return {};
@@ -55,7 +58,7 @@ export default {
     },
   },
   components: {
-    ResponseAllertVue,
+    ErrorMessage,
   },
 };
 </script>
