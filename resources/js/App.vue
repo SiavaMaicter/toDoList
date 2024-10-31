@@ -1,6 +1,9 @@
 <template>
   <div>APP PAGE</div>
-  <div>
+  <div v-if="err">
+    <ResponseAllertVue :alert="err" />
+  </div>
+  <div v-if="todos">
     <div class="table-responsive">
       <table
         class="table table-striped table-hover table-borderless table-primary align-middle"
@@ -28,7 +31,6 @@
             </td>
           </tr>
         </tbody>
-        <tfoot></tfoot>
       </table>
     </div>
   </div>
@@ -37,17 +39,28 @@
 
 <script>
 import axios from "axios";
+import ResponseAllertVue from "./components/messageComponents/ResponseAllert.vue";
 export default {
   data() {
     return {
       todos: null,
+      err: {},
     };
   },
   mounted() {
-    axios.get("/api/todos").then((res) => {
-      console.log(res);
-      this.todos = res.data.todos;
-    });
+    axios
+      .get("/api/todos")
+      .then((res) => {
+        console.log(res);
+        this.todos = res.data.todos;
+      })
+      .catch((err) => {
+        this.err.message = err.response.data;
+        this.err.status = err.response.status;
+      });
+  },
+  components: {
+    ResponseAllertVue,
   },
 };
 </script>
