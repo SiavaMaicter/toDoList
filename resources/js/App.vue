@@ -4,7 +4,15 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  mounted() {
+    axios.get("/api/todos").then((res) => {
+      console.log(res.data);
+      this.todos = res.data.todos;
+    });
+  },
+};
 </script>
 
 <style>

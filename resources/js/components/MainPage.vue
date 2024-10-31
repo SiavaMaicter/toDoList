@@ -1,7 +1,13 @@
 <template>DEFAUL PAGE</template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      todos: null,
+    };
+  },
+};
 </script>
 
 <style>
