@@ -12,9 +12,7 @@ const actions = {
         axios
             .get("/api/todos")
             .then((res) => {
-                res.data.message
-                    ? (state.message = res.data.message)
-                    : (state.todos = res.data.todos);
+                state.todos = res.data.todos;
             })
             .catch((err) => {
                 state.err.message = err.response.data;
