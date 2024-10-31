@@ -11,7 +11,7 @@ class ToDosController extends Controller
     public function index()
     {
         try {
-            $todos = ToDodadad::all();
+            $todos = ToDo::all();
         } catch (Error $err) {
             // return response()->json(["error" => "Failed to retrieve tasks", "status" => 500]);
             return response("Failed to retrieve tasks", 500);
