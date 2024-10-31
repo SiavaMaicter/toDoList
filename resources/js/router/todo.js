@@ -2,7 +2,7 @@ const routes = [
     {
         path: "/",
         component: () => import("../components/MainPage.vue"),
-        name: "MainHeatbase",
+        name: "MainPage",
     },
 ];
 
