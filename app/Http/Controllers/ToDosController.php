@@ -50,4 +50,21 @@ class ToDosController extends Controller
             ]), 200);
         }
     }
+    public function edit(Request $todo, $id)
+    {
+        try {
+            $todo_db = Todo::find($id);
+            $todo_db::update([
+                "name" => $todo->name,
+                "description" => $todo->description,
+                "deadline" => $todo->deadline
+            ]);
+            return response("Success update", 500);
+        } catch (Error $err) {
+            return response(json_encode([
+                "message" => "Update failed",
+                "err_disc" => $err->getMessage(),
+            ]), 200);
+        }
+    }
 }
