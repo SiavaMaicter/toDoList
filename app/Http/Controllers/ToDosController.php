@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TodoRequest;
 use App\Models\ToDo;
 use Error;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class ToDosController extends Controller
             ]), 500);
         }
     }
-    public function create(Request $todo)
+    public function create(TodoRequest $todo)
     {
         try {
             Todo::create([
@@ -50,7 +51,7 @@ class ToDosController extends Controller
             ]), 200);
         }
     }
-    public function edit(Request $todo, $id)
+    public function edit(TodoRequest $todo, $id)
     {
         try {
             $todo_db = Todo::find($id);
