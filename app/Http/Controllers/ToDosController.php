@@ -12,7 +12,7 @@ class ToDosController extends Controller
     {
         try {
             $todos = ToDo::all();
-            return response(compact('todos'), 200);
+            return response(compact('todos'), status: 200);
             // return response()->json([compact('todos'), "status" => 500]);
         } catch (Error $err) {
             // return response()->json(["error" => "Failed to retrieve tasks", "status" => 500]);
@@ -42,7 +42,7 @@ class ToDosController extends Controller
                 "description" => $todo->description,
                 "deadline" => $todo->deadline
             ]);
-            return response("Success create", 500);
+            return response("Success create", 200);
         } catch (Error $err) {
             return response(json_encode([
                 "message" => "Creation failed",
@@ -59,12 +59,25 @@ class ToDosController extends Controller
                 "description" => $todo->description,
                 "deadline" => $todo->deadline
             ]);
-            return response("Success update", 500);
+            return response("Success update", 200);
         } catch (Error $err) {
             return response(json_encode([
                 "message" => "Update failed",
                 "err_disc" => $err->getMessage(),
-            ]), 200);
+            ]), 500);
+        }
+    }
+    public function delete($id)
+    {
+        try {
+            $todo_db = Todo::find($id);
+            $todo_db->delete();
+            return response("Success delete", 200);
+        } catch (Error $err) {
+            return response(json_encode([
+                "message" => "Update failed",
+                "err_disc" => $err->getMessage(),
+            ]), 500);
         }
     }
 }
