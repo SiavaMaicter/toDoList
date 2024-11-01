@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/todos', [ToDosController::class, 'index']);
+Route::apiResource('/todos', ToDosController::class);
