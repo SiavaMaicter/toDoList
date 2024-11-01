@@ -16,7 +16,10 @@ class ToDosController extends Controller
             // return response()->json([compact('todos'), "status" => 500]);
         } catch (Error $err) {
             // return response()->json(["error" => "Failed to retrieve tasks", "status" => 500]);
-            return response("Failed to retrieve tasks", 500);
+            return response(json_encode([
+                "message" => "Непредвиденная ошибка",
+                "err_disc" => $err->getMessage()
+            ]), 500);
         }
     }
     public function show($id)
@@ -29,6 +32,22 @@ class ToDosController extends Controller
                 "message" => "Failed to retrieve tasks",
                 "err_disc" => $err->getMessage()
             ]), 500);
+        }
+    }
+    public function create(Request $todo)
+    {
+        try {
+            Todo::create([
+                "name" => $todo->name,
+                "description" => $todo->description,
+                "deadline" => $todo->deadline
+            ]);
+            return response("Success create", 500);
+        } catch (Error $err) {
+            return response(json_encode([
+                "message" => "Creation failed",
+                "err_disc" => $err->getMessage(),
+            ]), 200);
         }
     }
 }
