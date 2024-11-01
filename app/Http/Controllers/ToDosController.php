@@ -19,4 +19,16 @@ class ToDosController extends Controller
             return response("Failed to retrieve tasks", 500);
         }
     }
+    public function show($id)
+    {
+        try {
+            $todo = Todo::find($id);
+            return response(compact($todo), 200);
+        } catch (Error $err) {
+            return response(json_encode([
+                "message" => "Failed to retrieve tasks",
+                "err_disc" => $err->getMessage()
+            ]), 500);
+        }
+    }
 }
