@@ -60,6 +60,17 @@ const actions = {
                 state.err.status = err.response.status;
             });
     },
+    deleteTodo({ state, commit, dispatch }, id) {
+        axios
+            .delete(`/api/todos/:${id}`)
+            .then((res) => {
+                return res.data;
+            })
+            .catch((err) => {
+                state.err.message = err.response.data;
+                state.err.status = err.response.status;
+            });
+    },
 };
 const mutations = {};
 export default {
