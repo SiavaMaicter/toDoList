@@ -18,17 +18,33 @@
       aria-describedby="helpDescription"
       v-model="todo.description"
     />
-    <small id="helpDescription" class="form-text text-muted">String text</small>
   </div>
-  <button class="btn btn-primary">SUBMIT</button>
+  <div class="container">
+    <VueDatePicker v-model="date" vertical></VueDatePicker>
+  </div>
+  <button class="btn btn-primary" @click="saveTodo">SUBMIT</button>
 </template>
-
+<script setup>
+import { ref } from "vue";
+const date = ref(new Date());
+</script>
 <script>
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 export default {
   data() {
     return {
       todo: {},
     };
+  },
+  methods: {
+    saveTodo() {
+      console.log(this.$refs);
+    },
+  },
+  mounted() {},
+  components: {
+    VueDatePicker,
   },
 };
 </script>
