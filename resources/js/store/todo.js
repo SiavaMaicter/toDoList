@@ -45,6 +45,21 @@ const actions = {
                 state.err.status = err.response.status;
             });
     },
+    updateTodo({ state, commit, dispatch }, todo) {
+        axios
+            .put(`/api/todos/:${todo.id}`, {
+                name: todo.name,
+                message: todo.message,
+                deadline: todo.deadline,
+            })
+            .then((res) => {
+                return res.data;
+            })
+            .catch((err) => {
+                state.err.message = err.response.data;
+                state.err.status = err.response.status;
+            });
+    },
 };
 const mutations = {};
 export default {
