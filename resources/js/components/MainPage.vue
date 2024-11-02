@@ -4,10 +4,6 @@
     <ErrorMessage :alert="err" />
   </div>
   <div v-if="todos">
-    красное
-    чебручи
-    григ№2
-    красная горка проверить температуры
     <div v-if="todos.length">
       <div class="table-responsive">
         <table
