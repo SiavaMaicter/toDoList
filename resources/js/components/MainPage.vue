@@ -3,6 +3,9 @@
   <div v-if="err.status">
     <ErrorMessage :alert="err" />
   </div>
+  <router-link class="btn-primary btn" :to="{ name: 'CreatePage' }">
+    Создать запись
+  </router-link>
   <div v-if="todos">
     <div v-if="todos.length">
       <div class="table-responsive">
