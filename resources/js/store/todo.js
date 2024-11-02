@@ -19,6 +19,58 @@ const actions = {
                 state.err.status = err.response.status;
             });
     },
+    getTodo({ state, commit, dispatch }, id) {
+        axios
+            .get(`/api/todos/:${id}`)
+            .then((res) => {
+                return res.data.todo;
+            })
+            .catch((err) => {
+                state.err.message = err.response.data;
+                state.err.status = err.response.status;
+            });
+    },
+    setTodo({ state, commit, dispatch }, todo) {
+        axios
+            .post(`/api/todos`, {
+                name: todo.name,
+                message: todo.message,
+                deadline: todo.deadline,
+            })
+            .then((res) => {
+                return res.data;
+            })
+            .catch((err) => {
+                state.err.message = err.response.data;
+                state.err.status = err.response.status;
+            });
+    },
+    updateTodo({ state, commit, dispatch }, todo) {
+        axios
+            .put(`/api/todos/:${todo.id}`, {
+                name: todo.name,
+                message: todo.message,
+                deadline: todo.deadline,
+            })
+            .then((res) => {
+                return res.data;
+            })
+            .catch((err) => {
+                state.err.message = err.response.data;
+                state.err.status = err.response.status;
+            });
+    },
+    deleteTodo({ state, commit, dispatch }, id) {
+        axios
+            .delete(`/api/todos/:${id}`)
+            .then((res) => {
+                return res.data;
+            })
+            .catch((err) => {
+                state.err.message = err.response.data;
+                state.err.status = err.response.status;
+            });
+    },
 };
 const mutations = {};
 export default {
