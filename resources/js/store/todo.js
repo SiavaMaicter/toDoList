@@ -19,6 +19,17 @@ const actions = {
                 state.err.status = err.response.status;
             });
     },
+    getTodo({ state, commit, dispatch, id }) {
+        axios
+            .get(`/api/todos/:${id}`)
+            .then((res) => {
+                return res.data.todo;
+            })
+            .catch((err) => {
+                state.err.message = err.response.data;
+                state.err.status = err.response.status;
+            });
+    },
 };
 const mutations = {};
 export default {
