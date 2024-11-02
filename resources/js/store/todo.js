@@ -19,11 +19,26 @@ const actions = {
                 state.err.status = err.response.status;
             });
     },
-    getTodo({ state, commit, dispatch, id }) {
+    getTodo({ state, commit, dispatch }, id) {
         axios
             .get(`/api/todos/:${id}`)
             .then((res) => {
                 return res.data.todo;
+            })
+            .catch((err) => {
+                state.err.message = err.response.data;
+                state.err.status = err.response.status;
+            });
+    },
+    setTodo({ state, commit, dispatch }, todo) {
+        axios
+            .post(`/api/todos`, {
+                name: todo.name,
+                message: todo.message,
+                deadline: todo.deadline,
+            })
+            .then((res) => {
+                return res.data;
             })
             .catch((err) => {
                 state.err.message = err.response.data;
