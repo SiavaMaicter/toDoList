@@ -23,6 +23,9 @@
     <VueDatePicker v-model="date" vertical></VueDatePicker>
   </div>
   <button class="btn btn-primary" @click="saveTodo">SUBMIT</button>
+  <router-link class="btn-warning btn" :to="{ name: 'MainPage' }">
+    Return main
+  </router-link>
 </template>
 <script setup>
 import { ref } from "vue";
