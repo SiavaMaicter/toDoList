@@ -4,7 +4,7 @@
     <label for="" class="form-label">Name</label>
     <input
       type="text"
-      class="form-control"
+      class="form-control needs-validation"
       aria-describedby="helpName"
       v-model="todo.name"
     />
@@ -14,7 +14,7 @@
     <label for="" class="form-label">Description</label>
     <input
       type="text"
-      class="form-control"
+      class="form-control needs-validation"
       aria-describedby="helpDescription"
       v-model="todo.description"
     />
@@ -29,6 +29,26 @@
 </template>
 <script setup>
 import { ref } from "vue";
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+// (function () {
+//   'use strict'
+
+//   // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//   var forms = document.querySelectorAll('.needs-validation')
+
+//   // Loop over them and prevent submission
+//   Array.prototype.slice.call(forms)
+//     .forEach(function (form) {
+//       form.addEventListener('submit', function (event) {
+//         if (!form.checkValidity()) {
+//           event.preventDefault()
+//           event.stopPropagation()
+//         }
+
+//         form.classList.add('was-validated')
+//       }, false)
+//     })
+// })()
 </script>
 <script>
 import VueDatePicker from "@vuepic/vue-datepicker";
@@ -46,6 +66,7 @@ export default {
         deadline: this.date,
         todo: this.todo,
       });
+      this.$router.push({ name: "MainPage" });
     },
   },
   mounted() {},

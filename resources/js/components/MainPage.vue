@@ -48,11 +48,9 @@
         </table>
       </div>
     </div>
-    <div v-else>
-      <router-link class="btn-primary btn" :to="{ name: 'CreatePage' }">
-        Создать запись
-      </router-link>
-    </div>
+    <router-link class="btn-primary btn" :to="{ name: 'CreatePage' }">
+      Создать запись
+    </router-link>
   </div>
 </template>
 
