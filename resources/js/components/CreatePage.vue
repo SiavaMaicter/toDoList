@@ -26,7 +26,6 @@
 </template>
 <script setup>
 import { ref } from "vue";
-const date = ref(new Date());
 </script>
 <script>
 import VueDatePicker from "@vuepic/vue-datepicker";
@@ -34,12 +33,16 @@ import "@vuepic/vue-datepicker/dist/main.css";
 export default {
   data() {
     return {
+      date: ref(new Date()),
       todo: {},
     };
   },
   methods: {
     saveTodo() {
-      console.log(this.$refs);
+      this.$store.dispatch("createTodo", {
+        deadline: this.date,
+        todo: this.todo,
+      });
     },
   },
   mounted() {},

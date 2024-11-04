@@ -30,12 +30,12 @@ const actions = {
                 state.err.status = err.response.status;
             });
     },
-    setTodo({ state, commit, dispatch }, todo) {
+    createTodo({ state, commit, dispatch }, data) {
         axios
             .post(`/api/todos`, {
-                name: todo.name,
-                message: todo.message,
-                deadline: todo.deadline,
+                name: data.todo.name,
+                message: data.todo.message,
+                deadline: data.deadline,
             })
             .then((res) => {
                 return res.data;

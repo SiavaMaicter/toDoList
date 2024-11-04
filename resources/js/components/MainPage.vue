@@ -63,6 +63,7 @@ export default {
       return this.$store.getters.err;
     },
   },
+  methods: {},
   components: {
     ErrorMessage,
   },
