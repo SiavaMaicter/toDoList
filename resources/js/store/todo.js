@@ -19,9 +19,9 @@ const actions = {
                 state.err.status = err.response.status;
             });
     },
-    getTodo({ state, commit, dispatch }, id) {
+    showTodo({ state, commit, dispatch }, data) {
         axios
-            .get(`/api/todos/:${id}`)
+            .get(`/api/todos/${data.id}`)
             .then((res) => {
                 return res.data.todo;
             })

@@ -28,7 +28,7 @@ class ToDosController extends Controller
     {
         try {
             $todo = Todo::find($id);
-            return response(compact($todo), 200);
+            return response(compact("todo"), 200);
         } catch (Error $err) {
             return response(json_encode([
                 "message" => "Failed to retrieve tasks",

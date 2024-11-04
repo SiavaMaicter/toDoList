@@ -33,6 +33,12 @@
               <td>
                 {{ todo.description }}
               </td>
+              <router-link
+                class="btn-primary btn"
+                :to="{ name: 'EditPage', params: { id: todo.id } }"
+              >
+                EDIT
+              </router-link>
             </tr>
           </tbody>
         </table>
