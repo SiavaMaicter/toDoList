@@ -20,10 +20,10 @@
         v-model="todo.description"
       />
     </div>
-    <!-- <div class="container">
-      <VueDatePicker v-model="date" vertical></VueDatePicker>
-    </div> -->
-    <!-- <button class="btn btn-primary" @click="saveTodo">SUBMIT</button> -->
+    <div class="container">
+      <VueDatePicker v-model="todo.deadline" vertical></VueDatePicker>
+    </div>
+    <button class="btn btn-primary" @click="updateTodo(todo)">SUBMIT</button>
     <router-link class="btn-warning btn" :to="{ name: 'MainPage' }">
       Return main
     </router-link>
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 export default {
   data() {
     return {
@@ -43,6 +45,14 @@ export default {
       .then((data) => {
         this.todo = data;
       });
+  },
+  methods: {
+    updateTodo(todo) {
+      this.$store.dispatch("updateTodo", todo);
+    },
+  },
+  components: {
+    VueDatePicker,
   },
 };
 </script>

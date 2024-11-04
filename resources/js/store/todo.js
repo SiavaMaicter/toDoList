@@ -48,9 +48,9 @@ const actions = {
     },
     updateTodo({ state, commit, dispatch }, todo) {
         axios
-            .put(`/api/todos/:${todo.id}`, {
+            .put(`/api/todos/${todo.id}`, {
                 name: todo.name,
-                message: todo.message,
+                description: todo.description,
                 deadline: todo.deadline,
             })
             .then((res) => {

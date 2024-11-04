@@ -52,11 +52,11 @@ class ToDosController extends Controller
             ]), 200);
         }
     }
-    public function edit(TodoRequest $todo, $id)
+    public function update(TodoRequest $todo, $id)
     {
         try {
             $todo_db = Todo::find($id);
-            $todo_db::update([
+            $todo_db->update([
                 "name" => $todo->name,
                 "description" => $todo->description,
                 "deadline" => $todo->deadline
