@@ -69,7 +69,7 @@ class ToDosController extends Controller
             ]), 500);
         }
     }
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             $todo_db = Todo::find($id);

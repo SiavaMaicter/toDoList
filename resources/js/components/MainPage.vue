@@ -3,9 +3,6 @@
   <div v-if="err.status">
     <ErrorMessage :alert="err" />
   </div>
-  <router-link class="btn-primary btn" :to="{ name: 'CreatePage' }">
-    Создать запись
-  </router-link>
   <div v-if="todos">
     <div v-if="todos.length">
       <div class="table-responsive">
@@ -33,20 +30,28 @@
               <td>
                 {{ todo.description }}
               </td>
-              <router-link
-                class="btn-primary btn"
-                :to="{ name: 'EditPage', params: { id: todo.id } }"
-              >
-                EDIT
-              </router-link>
+              <td>
+                <router-link
+                  class="btn-primary btn"
+                  :to="{ name: 'EditPage', params: { id: todo.id } }"
+                >
+                  EDIT
+                </router-link>
+              </td>
+              <td>
+                <button class="btn btn-danger" @click="deleteTodo(todo.id)">
+                  DELETE
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
     <div v-else>
-      <div>На данный момент записей нет</div>
-      <button class="btn btn-primary">ADD NEW</button>
+      <router-link class="btn-primary btn" :to="{ name: 'CreatePage' }">
+        Создать запись
+      </router-link>
     </div>
   </div>
 </template>
@@ -69,7 +74,11 @@ export default {
       return this.$store.getters.err;
     },
   },
-  methods: {},
+  methods: {
+    deleteTodo(id) {
+      this.$store.dispatch("deleteTodo", { id: id });
+    },
+  },
   components: {
     ErrorMessage,
   },

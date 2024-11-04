@@ -63,13 +63,16 @@ const actions = {
     },
     deleteTodo({ state, commit, dispatch }, id) {
         axios
-            .delete(`/api/todos/:${id}`)
+            .delete(`/api/todos/${id.id}`)
             .then((res) => {
                 return res.data;
             })
             .catch((err) => {
                 state.err.message = err.response.data;
                 state.err.status = err.response.status;
+            })
+            .finally((data) => {
+                dispatch("getTodoList");
             });
     },
 };
