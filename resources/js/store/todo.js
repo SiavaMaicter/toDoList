@@ -20,9 +20,10 @@ const actions = {
             });
     },
     showTodo({ state, commit, dispatch }, data) {
-        axios
+        return axios
             .get(`/api/todos/${data.id}`)
             .then((res) => {
+                console.log(res);
                 return res.data.todo;
             })
             .catch((err) => {

@@ -20,10 +20,10 @@
         v-model="todo.description"
       />
     </div>
-    <div class="container">
+    <!-- <div class="container">
       <VueDatePicker v-model="date" vertical></VueDatePicker>
-    </div>
-    <button class="btn btn-primary" @click="saveTodo">SUBMIT</button>
+    </div> -->
+    <!-- <button class="btn btn-primary" @click="saveTodo">SUBMIT</button> -->
     <router-link class="btn-warning btn" :to="{ name: 'MainPage' }">
       Return main
     </router-link>
@@ -38,7 +38,11 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("showTodo", { id: this.$route.params.id });
+    this.$store
+      .dispatch("showTodo", { id: this.$route.params.id })
+      .then((data) => {
+        this.todo = data;
+      });
   },
 };
 </script>
