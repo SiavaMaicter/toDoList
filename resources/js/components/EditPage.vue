@@ -49,6 +49,7 @@ export default {
   methods: {
     updateTodo(todo) {
       this.$store.dispatch("updateTodo", todo);
+      this.$router.push({ name: "MainPage" });
     },
   },
   components: {
