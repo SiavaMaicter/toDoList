@@ -34,7 +34,7 @@ const actions = {
         axios
             .post(`/api/todos`, {
                 name: data.todo.name,
-                message: data.todo.message,
+                description: data.todo.description,
                 deadline: data.deadline,
             })
             .then((res) => {

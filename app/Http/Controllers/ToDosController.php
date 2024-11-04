@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoRequest;
 use App\Models\ToDo;
+use DateTime;
 use Error;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class ToDosController extends Controller
     {
         try {
             $todos = ToDo::all();
-            return response(compact('todos'), status: 200);
+            return response(content: compact('todos'), status: 200);
             // return response()->json([compact('todos'), "status" => 500]);
         } catch (Error $err) {
             // return response()->json(["error" => "Failed to retrieve tasks", "status" => 500]);
@@ -35,13 +36,13 @@ class ToDosController extends Controller
             ]), 500);
         }
     }
-    public function create(TodoRequest $todo)
+    public function store(TodoRequest $todo)
     {
         try {
             Todo::create([
                 "name" => $todo->name,
                 "description" => $todo->description,
-                "deadline" => $todo->deadline
+                "deadline" => (new DateTime($todo->deadline))->format("Y-m-d H:i:s")
             ]);
             return response("Success create", 200);
         } catch (Error $err) {
