@@ -7,6 +7,16 @@ const routes = [
         component: () => import("../components/MainPage.vue"),
         name: "MainPage",
     },
+    {
+        path: "/create",
+        component: () => import("../components/CreatePage.vue"),
+        name: "CreatePage",
+    },
+    {
+        path: "/edit/:id",
+        component: () => import("../components/EditPage.vue"),
+        name: "EditPage",
+    },
 ];
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
