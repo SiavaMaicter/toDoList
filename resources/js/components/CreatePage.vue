@@ -1,27 +1,31 @@
 <template>
   <title>CREATE PAGE</title>
-  <form class="row g-3 needs-validation was-validated" novalidate>
-    <div class="col-md-4">
-      <label class="form-label">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        aria-describedby="helpName"
-        v-model="todo.name"
-      />
-      <small id="helpName" class="form-text text-muted">String name</small>
-      <div class="invalid-feedback">Looks bad!</div>
-      <div class="valid-feedback">Looks good!</div>
-    </div>
-  </form>
-  <div class="mb-3">
-    <label class="form-label invalid">Description</label>
+  <div class="col-md-4">
+    <label class="form-label">Name</label>
     <input
       type="text"
-      class="form-control needs-validation"
+      @blur="v$.todo.name.$touch"
+      class="form-control"
+      aria-describedby="helpName"
+      v-model="todo.name"
+    />
+    <small id="helpName" class="form-text text-muted">String name</small>
+    <div v-if="v$.todo.name.$error">
+      {{ v$.todo.name.$errors[0].$message }}
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <input
+      type="text"
+      @blur="v$.todo.name.$touch"
+      class="form-control"
       aria-describedby="helpDescription"
       v-model="todo.description"
     />
+  </div>
+  <div v-if="v$.todo.description.$error">
+    {{ v$.todo.description.$errors[0].$message }}
   </div>
   <div class="container">
     <VueDatePicker v-model="date" vertical required></VueDatePicker>
@@ -37,28 +41,49 @@ import { ref } from "vue";
 <script>
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 export default {
   data() {
     return {
+      v$: useVuelidate(),
       date: ref(new Date()),
-      todo: {},
+      todo: {
+        name: null,
+        description: null,
+      },
+    };
+  },
+  validations() {
+    return {
+      todo: {
+        name: { required },
+        description: { required },
+      },
+      date: { required },
     };
   },
   methods: {
-    validate() {},
     saveTodo() {
-      this.validate();
-      this.$store
-        .dispatch("createTodo", {
-          deadline: this.date,
-          todo: this.todo,
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.submitForm();
+      if (!this.v$.$error) {
+        this.$store
+          .dispatch("createTodo", {
+            deadline: this.date,
+            todo: this.todo,
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        return false;
+      }
+    },
+    async submitForm() {
+      await this.v$.$validate();
     },
   },
   mounted() {},

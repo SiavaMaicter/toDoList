@@ -1,8 +1,8 @@
 <template>
   <div>APP PAGE</div>
-  <div v-if="err.status">
+  <!-- <div v-if="err.status">
     <ErrorMessage :alert="err" />
-  </div>
+  </div> -->
   <div v-if="todos">
     <div v-if="todos.length">
       <div class="table-responsive">
