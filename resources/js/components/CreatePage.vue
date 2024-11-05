@@ -1,29 +1,27 @@
 <template>
   <title>CREATE PAGE</title>
-  <b-form>
-    <div class="mb-3">
-      <label class="form-label">Name</label>
-      <input
-        type="text"
-        class="form-control needs-validation"
-        aria-describedby="helpName"
-        v-model="todo.name"
-      />
-      <small id="helpName" class="form-text text-muted">String name</small>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Description</label>
-      <input
-        type="text"
-        class="form-control needs-validation"
-        aria-describedby="helpDescription"
-        v-model="todo.description"
-      />
-    </div>
-    <div class="container">
-      <VueDatePicker v-model="date" vertical></VueDatePicker>
-    </div>
-  </b-form>
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control needs-validation"
+      aria-describedby="helpName"
+      v-model="todo.name"
+    />
+    <small id="helpName" class="form-text text-muted">String name</small>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <input
+      type="text"
+      class="form-control needs-validation"
+      aria-describedby="helpDescription"
+      v-model="todo.description"
+    />
+  </div>
+  <div class="container">
+    <VueDatePicker v-model="date" vertical required></VueDatePicker>
+  </div>
   <button class="btn btn-primary" @click="saveTodo">SUBMIT</button>
   <router-link class="btn-warning btn" :to="{ name: 'MainPage' }">
     Return main
@@ -43,12 +41,20 @@ export default {
     };
   },
   methods: {
+    validate() {},
     saveTodo() {
-      this.$store.dispatch("createTodo", {
-        deadline: this.date,
-        todo: this.todo,
-      });
-      this.$router.push({ name: "MainPage" });
+      this.validate();
+      this.$store
+        .dispatch("createTodo", {
+          deadline: this.date,
+          todo: this.todo,
+        })
+        .then((res) => {
+          //   this.$router.push({ name: "MainPage" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   mounted() {},

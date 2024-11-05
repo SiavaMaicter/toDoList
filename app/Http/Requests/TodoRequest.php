@@ -27,4 +27,14 @@ class TodoRequest extends FormRequest
             "deadline" => "date",
         ];
     }
+    public function messages(): array
+    {
+        return [
+            "name" => "Entered invalid name",
+            "description" => "Entered invalid description",
+            "deadline" => "Entered invalid deadline",
+            "name.required" => "Please enter name",
+            "description.required" => "Please enter description",
+        ];
+    }
 }

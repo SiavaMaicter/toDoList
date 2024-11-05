@@ -8,6 +8,7 @@
         class="form-control"
         aria-describedby="helpName"
         v-model="todo.name"
+        required
       />
       <small id="helpName" class="form-text text-muted">String name</small>
     </div>
@@ -18,10 +19,11 @@
         class="form-control"
         aria-describedby="helpDescription"
         v-model="todo.description"
+        required
       />
     </div>
     <div class="container">
-      <VueDatePicker v-model="todo.deadline" vertical></VueDatePicker>
+      <VueDatePicker v-model="todo.deadline" vertical required></VueDatePicker>
     </div>
     <button class="btn btn-primary" @click="updateTodo(todo)">SUBMIT</button>
     <router-link class="btn-warning btn" :to="{ name: 'MainPage' }">
@@ -37,6 +39,7 @@ export default {
   data() {
     return {
       todo: null,
+      validBlured: null,
     };
   },
   mounted() {

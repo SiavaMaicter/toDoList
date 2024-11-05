@@ -32,7 +32,7 @@ const actions = {
             });
     },
     createTodo({ state, commit, dispatch }, data) {
-        axios
+        return axios
             .post(`/api/todos`, {
                 name: data.todo.name,
                 description: data.todo.description,
