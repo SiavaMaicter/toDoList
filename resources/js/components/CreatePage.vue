@@ -1,17 +1,21 @@
 <template>
   <title>CREATE PAGE</title>
+  <form class="row g-3 needs-validation was-validated" novalidate>
+    <div class="col-md-4">
+      <label class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        aria-describedby="helpName"
+        v-model="todo.name"
+      />
+      <small id="helpName" class="form-text text-muted">String name</small>
+      <div class="invalid-feedback">Looks bad!</div>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+  </form>
   <div class="mb-3">
-    <label class="form-label">Name</label>
-    <input
-      type="text"
-      class="form-control needs-validation"
-      aria-describedby="helpName"
-      v-model="todo.name"
-    />
-    <small id="helpName" class="form-text text-muted">String name</small>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Description</label>
+    <label class="form-label invalid">Description</label>
     <input
       type="text"
       class="form-control needs-validation"
@@ -50,7 +54,7 @@ export default {
           todo: this.todo,
         })
         .then((res) => {
-          //   this.$router.push({ name: "MainPage" });
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);
@@ -60,6 +64,11 @@ export default {
   mounted() {},
   components: {
     VueDatePicker,
+  },
+  computed: {
+    err() {
+      return this.$store.getters.err;
+    },
   },
 };
 </script>

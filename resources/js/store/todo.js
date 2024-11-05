@@ -1,7 +1,7 @@
 import axios from "axios";
 const state = {
     todos: null,
-    err: {},
+    err: null,
 };
 const getters = {
     todos: (state) => state.todos,
@@ -42,8 +42,7 @@ const actions = {
                 return res.data;
             })
             .catch((err) => {
-                state.err.message = err.response.data;
-                state.err.status = err.response.status;
+                state.err = err.response.data.errors;
             });
     },
     updateTodo({ state, commit, dispatch }, todo) {
