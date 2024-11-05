@@ -8,9 +8,11 @@
         class="form-control"
         aria-describedby="helpName"
         v-model="todo.name"
-        required
       />
       <small id="helpName" class="form-text text-muted">String name</small>
+      <div v-if="v$.todo.name.$error">
+        {{ v$.todo.name.$errors[0].$message }}
+      </div>
     </div>
     <div class="mb-3">
       <label for="" class="form-label">Description</label>
@@ -19,8 +21,10 @@
         class="form-control"
         aria-describedby="helpDescription"
         v-model="todo.description"
-        required
       />
+    </div>
+    <div v-if="v$.todo.description.$error">
+      {{ v$.todo.description.$errors[0].$message }}
     </div>
     <div class="container">
       <VueDatePicker v-model="todo.deadline" vertical required></VueDatePicker>
@@ -35,11 +39,22 @@
 <script>
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 export default {
   data() {
     return {
+      v$: useVuelidate(),
       todo: null,
-      validBlured: null,
+    };
+  },
+  validations() {
+    return {
+      todo: {
+        name: { required },
+        description: { required },
+        deadline: { required },
+      },
     };
   },
   mounted() {
@@ -51,8 +66,15 @@ export default {
   },
   methods: {
     updateTodo(todo) {
-      this.$store.dispatch("updateTodo", todo);
-      this.$router.push({ name: "MainPage" });
+      this.submitForm();
+      if (!this.v$.$error) {
+        this.$store.dispatch("updateTodo", todo).then((res) => {
+          this.$router.push({ name: "MainPage" });
+        });
+      }
+    },
+    async submitForm() {
+      await this.v$.$validate();
     },
   },
   components: {
